@@ -1,7 +1,7 @@
 import ordersRouter from '@modules/orders/infra/http/routes/orders.routes';
 import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from "typeorm";
 
-export class AddCustomerIdToOders1614822819919 implements MigrationInterface {
+export default class AddCustomerIdToOders1614822819919 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
@@ -16,7 +16,7 @@ export class AddCustomerIdToOders1614822819919 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'orders',
       new TableForeignKey({
-        name: 'OrderCustomers',
+        name: 'OrdersCustomer',
         columnNames: ['customer_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'customers',
@@ -26,7 +26,7 @@ export class AddCustomerIdToOders1614822819919 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('orders', 'OrderCustomers');
+    await queryRunner.dropForeignKey('orders', 'OrdersCustomer');
 
     await queryRunner.dropColumn('orders', 'customer_id');
   }

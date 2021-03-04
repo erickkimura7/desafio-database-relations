@@ -56,13 +56,13 @@ class CreateOrderService {
     }
 
     // validar quantidade de products - existentProductsIds
-    const produtosSemQuantidade = produtosEncontrados.filter(produtoEncontrado => {
+    const produtosSemQuantidade = existentProducts.filter(produtoEncontrado => {
       const produto = products.find(prod => prod.id === produtoEncontrado.id);
 
       if (!produto) {
         return true;
       }
-
+      console.log(`produto quantidade ${produto.quantity} - ${produtoEncontrado.quantity}`)
       return produto.quantity > produtoEncontrado.quantity;
     });
 
@@ -86,7 +86,7 @@ class CreateOrderService {
     const ordQuant = order_products.map(product => ({
       id: product.product_id,
       quantity:
-        existentProducts.filter(p => p.id === product.id)[0].quantity - product.quantity
+        existentProducts.filter(p => p.id === product.product_id)[0].quantity - product.quantity
     }))
 
     await this.productsRepository.updateQuantity(ordQuant);

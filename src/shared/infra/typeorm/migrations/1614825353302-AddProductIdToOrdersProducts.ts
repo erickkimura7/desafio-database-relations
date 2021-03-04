@@ -18,7 +18,7 @@ export default class AddProductIdToOrdersProducts1614825353302 implements Migrat
         name: 'OrdersProductsProduct',
         columnNames: ['product_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'orders',
+        referencedTableName: 'products',
         onDelete: `SET NULL`,
       })
     )
